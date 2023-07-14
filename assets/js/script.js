@@ -1,11 +1,12 @@
-// CatButton API 
-
 var catButton = document.getElementById('cat-fact');
 var dogFactbtn = document.getElementById('dog-fact')
 var breedInputEl = document.querySelector(".search-breed");
 var breedForm = document.querySelector("#breed-input");
 var petType = document.querySelector("#pet-select");
 var clearEl = document.querySelector("#clear");
+var historyEl = document.querySelector(".search-history");
+var searchHistoryDog = JSON.parse(localStorage.getItem("searchDog")) || [];
+var searchHistoryCat = JSON.parse(localStorage.getItem("searchCat")) || [];
 
 dogFactbtn.addEventListener('click', function() {
     
@@ -42,6 +43,9 @@ function getBreedInput(event) {
     var searchTerm = breedInputEl.value;
     clearCurrent();
     getInfoByDogBreed(searchTerm);
+    searchHistoryDog.push(searchTerm);
+    localStorage.setItem("searchDog", JSON.stringify(searchHistoryDog));
+    pastSearch(searchTerm);
 }
 
 // get user answer from breed input run cat function
@@ -50,6 +54,8 @@ function getBreedInputCat(event) {
     clearCurrent();
     var searchTerm = breedInputEl.value;
     getInfoByCatBreed(searchTerm);
+    searchHistoryCat.push(searchTerm);
+    localStorage.setItem("searchCat", JSON.stringify(searchHistoryCat));
 }
 
 
@@ -271,6 +277,27 @@ function clearHistory(event) {
     localStorage.removeItem("searchCat");
     historyEl.innerHTML = "";
     return;
+}
+
+// function to turn past searches into buttons
+var pastSearch = function(pastSearch) {
+    var pastSearchEl = document.createElement("button");
+    pastSearchEl.classList.add("button", "is-link", "is-light", "mt-2", "mr-1");
+    pastSearchEl.textContent = pastSearch;
+    pastSearchEl.setAttribute("data-breed", pastSearch);
+    pastSearchEl.setAttribute("type", "submit");
+    // prepends button to search history div in html
+    historyEl.prepend(pastSearchEl);
+}
+
+// function to display data from previous search buttons
+var pastSearchData = function(event) {
+    var breed = event.target.getAttribute("data-breed");
+    if(breed) {
+        clearCurrent();
+        getInfoByDogBreed(breed);
+        getInfoByCatBreed(breed);
+    }
 }
 
 // clears current search when new search
