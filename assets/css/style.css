@@ -1,3 +1,11 @@
+/* element selector to style list items made in javascript */
+li {
+    margin: 2rem 4rem;
+    font-size: 30px;
+    font-weight: 500;
+    text-align: center;
+}
+
 /* adds darkness to hero image so buttons are more visible */
 #hero {
     background-image: url("../images/hero-image.jpg"), linear-gradient(rgba(0,0,0,0.5),rgba(0,0,0,0.5));
