@@ -5,6 +5,7 @@ var breedForm = document.querySelector("#breed-input");
 var petType = document.querySelector("#pet-select");
 var selectedPetType;
 var notification = document.querySelector("#modal");
+var notificationBtn = document.querySelector(".notification .delete");
 var clearEl = document.querySelector("#clear");
 var historyEl = document.querySelector(".search-history");
 var searchHistoryDog = JSON.parse(localStorage.getItem("searchDog")) || [];
@@ -138,6 +139,9 @@ catButton.addEventListener('click', function() {
                     
                     container.appendChild(ul);
 
+                }) .catch(function(error) {
+                    console.log(error);
+                    showModal();
                 })
         }
 
@@ -159,6 +163,9 @@ catButton.addEventListener('click', function() {
                 })
                 .then(function(breedData) {
                     console.log(breedData);
+
+                    
+        
                     var container = document.querySelector(".breed-data");
                     
                     var centerDiv = document.createElement('div');
@@ -233,6 +240,9 @@ catButton.addEventListener('click', function() {
                     
                     container.appendChild(ul);
 
+                }) .catch(function(error) {
+                    console.log(error);
+                    showModal();
                 })
         }
 
@@ -311,15 +321,11 @@ function clearCurrent() {
     return;
 }
 
-// function to close notification when 'x' is clicked
-(document.querySelectorAll('.notification .delete') || []).forEach(($delete) => {
-    const $notification = $delete.parentNode;
+// function to close notification popup when 'x' is clicked
+notificationBtn.addEventListener("click", function() {
+    notification.classList.add('hide');
 
-    $delete.addEventListener('click', () => {
-      $notification.parentNode.removeChild($notification);
-    });
-  });
-
+})
 
 historyEl.addEventListener("click", pastSearchData);
 clearEl.addEventListener("click", clearHistory);
