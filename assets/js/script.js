@@ -3,6 +3,7 @@ var dogFactbtn = document.getElementById('dog-fact')
 var breedInputEl = document.querySelector(".search-breed");
 var breedForm = document.querySelector("#breed-input");
 var petType = document.querySelector("#pet-select");
+var selectedPetType;
 var clearEl = document.querySelector("#clear");
 var historyEl = document.querySelector(".search-history");
 var searchHistoryDog = JSON.parse(localStorage.getItem("searchDog")) || [];
@@ -37,26 +38,7 @@ catButton.addEventListener('click', function() {
         })
 })
 
-// get user answer from breed input run dog function
-function getBreedInput(event) {
-    event.preventDefault();
-    var searchTerm = breedInputEl.value;
-    clearCurrent();
-    getInfoByDogBreed(searchTerm);
-    searchHistoryDog.push(searchTerm);
-    localStorage.setItem("searchDog", JSON.stringify(searchHistoryDog));
-    pastSearch(searchTerm);
-}
 
-// get user answer from breed input run cat function
-function getBreedInputCat(event) {
-    event.preventDefault();
-    clearCurrent();
-    var searchTerm = breedInputEl.value;
-    getInfoByCatBreed(searchTerm);
-    searchHistoryCat.push(searchTerm);
-    localStorage.setItem("searchCat", JSON.stringify(searchHistoryCat));
-}
 
 
         // function to get information from api on dog breed input
@@ -254,21 +236,35 @@ function getBreedInputCat(event) {
         }
 
 
-// function to listen for change on select dropdown menu
-petType.onchange = changeListener;
 
-// function to run dog breed function if dog is selected and cat breed function if cat is selected
-function changeListener() {
-    var value = this.value;
+// get user answer from breed input run dog function
+function getBreedInput(event) {
+    event.preventDefault();
+    var searchTerm = breedInputEl.value;
+    clearCurrent();
 
-    if (value == "dog") {
-        breedForm.addEventListener("submit", getBreedInput);
-    } else if (value == "cat") {
-        breedForm.addEventListener("submit", getBreedInputCat);
+    if (selectedPetType === 'cat') {
+        getInfoByCatBreed(searchTerm);
+        searchHistoryCat.push(searchTerm);
+        localStorage.setItem("searchCat", JSON.stringify(searchHistoryCat));
+    } else {
+        getInfoByDogBreed(searchTerm);
+        searchHistoryDog.push(searchTerm);
+        localStorage.setItem("searchDog", JSON.stringify(searchHistoryDog));
     }
+    pastSearch(searchTerm);
 }
 
-changeListener();
+// // function to run dog breed function if dog is selected and cat breed function if cat is selected
+petType.onchange = function changeListener() {
+    selectedPetType = this.value;
+
+}
+
+breedForm.addEventListener("submit", getBreedInput);
+
+
+// changeListener();
 
 // function to clear search history
 function clearHistory(event) {
