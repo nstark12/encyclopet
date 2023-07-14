@@ -1,4 +1,6 @@
+// CatButton API 
 
+var catButton = document.getElementById('cat-fact');
 var dogFactbtn = document.getElementById('dog-fact')
 var breedInputEl = document.querySelector(".search-breed");
 var breedForm = document.querySelector("#breed-input");
@@ -18,6 +20,20 @@ dogFactbtn.addEventListener('click', function() {
         heroText.classList.add('is-size-3')
     })
 
+})
+// --------Cat Button--------------------
+catButton.addEventListener('click', function() {
+    fetch('https://catfact.ninja/fact')
+        .then( function(response) {
+            return response.json();
+        })
+        .then(function(data) {
+            console.log(data);
+            var heroText = document.querySelector("#hero-text");
+            heroText.textContent = data.fact;
+            heroText.classList.add("is-size-3")
+
+        })
 })
 
 // get user answer from breed input run dog function
