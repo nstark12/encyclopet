@@ -13,3 +13,7 @@ li {
     background-size: cover;
     background-position: center;
 }
+
+.hide {
+    display: none;
+}

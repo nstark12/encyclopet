@@ -28,6 +28,14 @@
         </div>
     </section>
 
+        <!-- notification to be revealed if search input does not work -->
+    <div id = "modal" class="container hide">
+        <div class="notification is-link m-2">
+            <button class="delete"></button>
+                Please choose a valid breed.
+        </div>
+    </div>
+
      <!-- User form to input location information and wants -->
      <div class="container">
       <section id="breed-form" class="section is-small">
@@ -46,8 +54,8 @@
                   <label class="label is-size-3">Pet Type</label>
                   <div class="control">
                   <div class="select is-link">
-                      <select id="pet-select" onchange="changeSelected(this)">
-                      <option value="select">Select</option>
+                      <select id="pet-select" onchange="changeSelected(this)" required>
+                      <option value="">Select</option>
                       <option value="dog">Dog</option>
                       <option value="cat">Cat</option>
                       </select>

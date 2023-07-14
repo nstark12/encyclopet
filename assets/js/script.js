@@ -4,6 +4,7 @@ var breedInputEl = document.querySelector(".search-breed");
 var breedForm = document.querySelector("#breed-input");
 var petType = document.querySelector("#pet-select");
 var selectedPetType;
+var notification = document.querySelector("#modal");
 var clearEl = document.querySelector("#clear");
 var historyEl = document.querySelector(".search-history");
 var searchHistoryDog = JSON.parse(localStorage.getItem("searchDog")) || [];
@@ -237,7 +238,7 @@ catButton.addEventListener('click', function() {
 
 
 
-// get user answer from breed input run dog function
+// get user answer from breed input run functions
 function getBreedInput(event) {
     event.preventDefault();
     var searchTerm = breedInputEl.value;
@@ -247,15 +248,21 @@ function getBreedInput(event) {
         getInfoByCatBreed(searchTerm);
         searchHistoryCat.push(searchTerm);
         localStorage.setItem("searchCat", JSON.stringify(searchHistoryCat));
-    } else {
+    } else if (selectedPetType === 'dog') {
         getInfoByDogBreed(searchTerm);
         searchHistoryDog.push(searchTerm);
         localStorage.setItem("searchDog", JSON.stringify(searchHistoryDog));
-    }
+    } 
     pastSearch(searchTerm);
 }
 
-// // function to run dog breed function if dog is selected and cat breed function if cat is selected
+// function to show pop up modal
+function showModal() {
+    notification.classList.remove("hide");
+}
+
+
+// function to listen for change on selected option of pet
 petType.onchange = function changeListener() {
     selectedPetType = this.value;
 
@@ -303,6 +310,15 @@ function clearCurrent() {
 
     return;
 }
+
+// function to close notification when 'x' is clicked
+(document.querySelectorAll('.notification .delete') || []).forEach(($delete) => {
+    const $notification = $delete.parentNode;
+
+    $delete.addEventListener('click', () => {
+      $notification.parentNode.removeChild($notification);
+    });
+  });
 
 
 historyEl.addEventListener("click", pastSearchData);
