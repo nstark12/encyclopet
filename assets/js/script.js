@@ -271,6 +271,7 @@ function showModal() {
     notification.classList.remove("hide");
 }
 
+// function to hide pop up modal
 function hideModal() {
     notification.classList.add("hide");
 }
@@ -285,7 +286,6 @@ petType.onchange = function changeListener() {
 breedForm.addEventListener("submit", getBreedInput);
 
 
-// changeListener();
 
 // function to clear search history
 function clearHistory(event) {
@@ -349,6 +349,7 @@ notificationBtn.addEventListener("click", function() {
     hideModal();
 
 })
+
 
 displaySearchHistory();
 historyEl.addEventListener("click", pastSearchData);
