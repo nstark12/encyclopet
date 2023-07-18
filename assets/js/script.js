@@ -263,7 +263,7 @@ function getBreedInput(event) {
         searchHistoryDog.push(searchTerm);
         localStorage.setItem("searchDog", JSON.stringify(searchHistoryDog));
     } 
-    pastSearch(searchTerm);
+    displaySearchHistory(searchTerm);
 }
 
 // function to show pop up modal
@@ -292,16 +292,39 @@ function clearHistory(event) {
     return;
 }
 
-// function to turn past searches into buttons
-var pastSearch = function(pastSearch) {
-    var pastSearchEl = document.createElement("button");
-    pastSearchEl.classList.add("button", "is-link", "is-light", "mt-2", "mr-1");
-    pastSearchEl.textContent = pastSearch;
-    pastSearchEl.setAttribute("data-breed", pastSearch);
-    pastSearchEl.setAttribute("type", "submit");
-    // prepends button to search history div in html
-    historyEl.prepend(pastSearchEl);
+
+// display search history as buttons
+function displaySearchHistory() {
+    historyEl.innerHTML = '';
+
+    for (i = 0; i < searchHistoryDog.length; i++) {
+        var pastSearchEl = document.createElement("button");
+        pastSearchEl.classList.add("button", "is-link", "is-light", "mt-2", "mr-1");
+        pastSearchEl.textContent = searchHistoryDog[i];
+        pastSearchEl.setAttribute("data-breed", searchHistoryDog[i]);
+        historyEl.appendChild(pastSearchEl);
+
+    }
+    console.log(searchHistoryDog);
+    return;
+    
 }
+
+
+// function to turn past searches into buttons
+// var pastSearch = function() {
+    
+//     for (var i = 0; i < searchHistoryDog.length; i++) {
+//         var pastSearchEl = document.createElement("button");
+//     pastSearchEl.classList.add("button", "is-link", "is-light", "mt-2", "mr-1");
+//     pastSearchEl.textContent = searchHistoryDog[i];
+//     pastSearchEl.setAttribute("data-breed", searchHistoryDog[i]);
+//     pastSearchEl.setAttribute("type", "submit");
+//     // prepends button to search history div in html
+//     historyEl.prepend(pastSearchEl);
+//     }
+//     console.log(searchHistoryDog);
+// }
 
 // function to display data from previous search buttons
 var pastSearchData = function(event) {
@@ -327,8 +350,10 @@ notificationBtn.addEventListener("click", function() {
 
 })
 
+displaySearchHistory();
 historyEl.addEventListener("click", pastSearchData);
 clearEl.addEventListener("click", clearHistory);
+
 
 
 
