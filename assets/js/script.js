@@ -263,12 +263,17 @@ function getBreedInput(event) {
         searchHistoryDog.push(searchTerm);
         localStorage.setItem("searchDog", JSON.stringify(searchHistoryDog));
     } 
-    pastSearch(searchTerm);
+    displaySearchHistory(searchTerm);
 }
 
 // function to show pop up modal
 function showModal() {
     notification.classList.remove("hide");
+}
+
+// function to hide pop up modal
+function hideModal() {
+    notification.classList.add("hide");
 }
 
 
@@ -281,7 +286,6 @@ petType.onchange = function changeListener() {
 breedForm.addEventListener("submit", getBreedInput);
 
 
-// changeListener();
 
 // function to clear search history
 function clearHistory(event) {
@@ -292,15 +296,34 @@ function clearHistory(event) {
     return;
 }
 
-// function to turn past searches into buttons
-var pastSearch = function(pastSearch) {
-    var pastSearchEl = document.createElement("button");
-    pastSearchEl.classList.add("button", "is-link", "is-light", "mt-2", "mr-1");
-    pastSearchEl.textContent = pastSearch;
-    pastSearchEl.setAttribute("data-breed", pastSearch);
-    pastSearchEl.setAttribute("type", "submit");
-    // prepends button to search history div in html
-    historyEl.prepend(pastSearchEl);
+
+// display search history as buttons
+function displaySearchHistory() {
+    historyEl.innerHTML = '';
+
+    for (i = 0; i < searchHistoryDog.length; i++) {
+        var pastSearchEl = document.createElement("button");
+        pastSearchEl.classList.add("button", "is-link", "is-light", "mt-2", "mr-1");
+        pastSearchEl.textContent = searchHistoryDog[i];
+        pastSearchEl.setAttribute("data-breed", searchHistoryDog[i]);
+        historyEl.appendChild(pastSearchEl);
+        
+
+    }
+    console.log(searchHistoryDog);
+  
+
+    for (i = 0; i < searchHistoryCat.length; i++) {
+        var pastSearchEl = document.createElement("button");
+        pastSearchEl.classList.add("button", "is-link", "is-light", "mt-2", "mr-1");
+        pastSearchEl.textContent = searchHistoryCat[i];
+        pastSearchEl.setAttribute("data-breed", searchHistoryCat[i]);
+        historyEl.appendChild(pastSearchEl);
+
+    }
+    console.log(searchHistoryCat);
+    return;
+    
 }
 
 // function to display data from previous search buttons
@@ -323,12 +346,15 @@ function clearCurrent() {
 
 // function to close notification popup when 'x' is clicked
 notificationBtn.addEventListener("click", function() {
-    notification.classList.add('hide');
+    hideModal();
 
 })
 
+
+displaySearchHistory();
 historyEl.addEventListener("click", pastSearchData);
 clearEl.addEventListener("click", clearHistory);
+
 
 
 
