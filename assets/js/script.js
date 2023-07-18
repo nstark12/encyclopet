@@ -271,6 +271,10 @@ function showModal() {
     notification.classList.remove("hide");
 }
 
+function hideModal() {
+    notification.classList.add("hide");
+}
+
 
 // function to listen for change on selected option of pet
 petType.onchange = function changeListener() {
@@ -303,6 +307,7 @@ function displaySearchHistory() {
         pastSearchEl.textContent = searchHistoryDog[i];
         pastSearchEl.setAttribute("data-breed", searchHistoryDog[i]);
         historyEl.appendChild(pastSearchEl);
+        
 
     }
     console.log(searchHistoryDog);
@@ -341,7 +346,7 @@ function clearCurrent() {
 
 // function to close notification popup when 'x' is clicked
 notificationBtn.addEventListener("click", function() {
-    notification.classList.add('hide');
+    hideModal();
 
 })
 
