@@ -306,25 +306,20 @@ function displaySearchHistory() {
 
     }
     console.log(searchHistoryDog);
+  
+
+    for (i = 0; i < searchHistoryCat.length; i++) {
+        var pastSearchEl = document.createElement("button");
+        pastSearchEl.classList.add("button", "is-link", "is-light", "mt-2", "mr-1");
+        pastSearchEl.textContent = searchHistoryCat[i];
+        pastSearchEl.setAttribute("data-breed", searchHistoryCat[i]);
+        historyEl.appendChild(pastSearchEl);
+
+    }
+    console.log(searchHistoryCat);
     return;
     
 }
-
-
-// function to turn past searches into buttons
-// var pastSearch = function() {
-    
-//     for (var i = 0; i < searchHistoryDog.length; i++) {
-//         var pastSearchEl = document.createElement("button");
-//     pastSearchEl.classList.add("button", "is-link", "is-light", "mt-2", "mr-1");
-//     pastSearchEl.textContent = searchHistoryDog[i];
-//     pastSearchEl.setAttribute("data-breed", searchHistoryDog[i]);
-//     pastSearchEl.setAttribute("type", "submit");
-//     // prepends button to search history div in html
-//     historyEl.prepend(pastSearchEl);
-//     }
-//     console.log(searchHistoryDog);
-// }
 
 // function to display data from previous search buttons
 var pastSearchData = function(event) {
