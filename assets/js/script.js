@@ -300,7 +300,6 @@ function displayLocalStorage () {
         pastSearchEl.setAttribute("type", "submit");
         historyEl.prepend(pastSearchEl);
     }
-    hideModal();
     return;
 }
 // function to display data from previous search buttons
