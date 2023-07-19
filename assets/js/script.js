@@ -58,7 +58,7 @@ catButton.addEventListener('click', function() {
                     return response.json();
                 })
                 .then(function(breedData) {
-                    console.log(breedData);
+                    console.log(breedData[0]);
 
                     var container = document.querySelector(".breed-data");
                     
@@ -162,7 +162,7 @@ catButton.addEventListener('click', function() {
                     return response.json();
                 })
                 .then(function(breedData) {
-                    console.log(breedData);
+                    console.log(breedData[0]);
 
                     
         
@@ -181,7 +181,7 @@ catButton.addEventListener('click', function() {
                     centerDiv.appendChild(h2);
 
                     var petImg = document.createElement('img');
-                        petImg.setAttribute("src", breedData[0].image_link);
+                        // petImg.setAttribute("src", breedData[0].image_link);
                     centerDiv.appendChild(petImg);
 
                     // capitalize first letter of breed name
@@ -307,6 +307,7 @@ var pastSearchData = function(event) {
     var breed = event.target.getAttribute("data-breed");
     if(breed) {
         clearCurrent();
+        hideModal();
         getInfoByDogBreed(breed);
         getInfoByCatBreed(breed);
     }
