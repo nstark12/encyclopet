@@ -263,7 +263,7 @@ function getBreedInput(event) {
         searchHistoryDog.push(searchTerm);
         localStorage.setItem("searchDog", JSON.stringify(searchHistoryDog));
     } 
-    displaySearchHistory(searchTerm);
+    displayLocalStorage(searchTerm);
 }
 
 // function to show pop up modal
@@ -286,17 +286,6 @@ petType.onchange = function changeListener() {
 breedForm.addEventListener("submit", getBreedInput);
 
 
-
-// function to clear search history
-function clearHistory(event) {
-    event.preventDefault();
-    localStorage.removeItem("searchDog");
-    localStorage.removeItem("searchCat");
-    historyEl.innerHTML = "";
-    return;
-}
-
-
 // display search history as buttons
 function displayLocalStorage () {
     var inputs = searchHistoryDog.concat(searchHistoryCat)
@@ -311,6 +300,7 @@ function displayLocalStorage () {
         pastSearchEl.setAttribute("type", "submit");
         historyEl.prepend(pastSearchEl);
     }
+    hideModal();
     return;
 }
 // function to display data from previous search buttons
@@ -327,6 +317,22 @@ var pastSearchData = function(event) {
 function clearCurrent() {
     var currentPet = document.querySelector(".breed-data");
     currentPet.innerText = "";
+    breedInputEl.value = "";
+
+    return;
+}
+
+// function to clear search history
+function clearHistory(event) {
+    event.preventDefault();
+    localStorage.removeItem("searchDog");
+    searchHistoryDog = [];
+    localStorage.removeItem("searchCat");
+    searchHistoryCat = [];
+    historyEl.innerHTML = "";
+    clearCurrent();
+    petType.selectedIndex = 0;
+    
 
     return;
 }
