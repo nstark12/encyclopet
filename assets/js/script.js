@@ -298,34 +298,21 @@ function clearHistory(event) {
 
 
 // display search history as buttons
-function displaySearchHistory() {
-    historyEl.innerHTML = '';
-
-    for (i = 0; i < searchHistoryDog.length; i++) {
-        var pastSearchEl = document.createElement("button");
-        pastSearchEl.classList.add("button", "is-link", "is-light", "mt-2", "mr-1");
-        pastSearchEl.textContent = searchHistoryDog[i];
-        pastSearchEl.setAttribute("data-breed", searchHistoryDog[i]);
-        historyEl.appendChild(pastSearchEl);
-        
-
-    }
-    console.log(searchHistoryDog);
-  
-
-    for (i = 0; i < searchHistoryCat.length; i++) {
-        var pastSearchEl = document.createElement("button");
-        pastSearchEl.classList.add("button", "is-link", "is-light", "mt-2", "mr-1");
-        pastSearchEl.textContent = searchHistoryCat[i];
-        pastSearchEl.setAttribute("data-breed", searchHistoryCat[i]);
-        historyEl.appendChild(pastSearchEl);
-
-    }
-    console.log(searchHistoryCat);
-    return;
+function displayLocalStorage () {
+    var inputs = searchHistoryDog.concat(searchHistoryCat)
+    var uniqueInputs = [...new Set(inputs)];
+    historyEl.innerHTML = ""
     
+    for (var i = 0; i < uniqueInputs.length; i++) {
+        var pastSearchEl = document.createElement("button");
+        pastSearchEl.classList.add("button", "is-link", "is-light", "mt-2", "mr-1");
+        pastSearchEl.textContent = uniqueInputs[i];
+        pastSearchEl.setAttribute("data-breed", uniqueInputs[i]);
+        pastSearchEl.setAttribute("type", "submit");
+        historyEl.prepend(pastSearchEl);
+    }
+    return;
 }
-
 // function to display data from previous search buttons
 var pastSearchData = function(event) {
     var breed = event.target.getAttribute("data-breed");
@@ -351,7 +338,7 @@ notificationBtn.addEventListener("click", function() {
 })
 
 
-displaySearchHistory();
+displayLocalStorage();
 historyEl.addEventListener("click", pastSearchData);
 clearEl.addEventListener("click", clearHistory);
 
