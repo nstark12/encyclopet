@@ -140,6 +140,10 @@ catButton.addEventListener('click', function() {
                     
                     container.appendChild(ul);
 
+                    searchHistoryDog.push(breedName);
+                    localStorage.setItem("searchDog", JSON.stringify(searchHistoryDog));
+                    displayLocalStorage(breedName);
+
                 }) .catch(function(error) {
                     console.log(error);
                     showModal();
@@ -241,6 +245,10 @@ catButton.addEventListener('click', function() {
                     
                     container.appendChild(ul);
 
+                    searchHistoryCat.push(breedName);
+                    localStorage.setItem("searchCat", JSON.stringify(searchHistoryCat));
+                    displayLocalStorage(breedName);
+
                 }) .catch(function(error) {
                     console.log(error);
                     showModal();
@@ -257,14 +265,12 @@ function getBreedInput(event) {
     console.log(selectedPetType)
     if (selectedPetType === 'cat') {
         getInfoByCatBreed(searchTerm);
-        searchHistoryCat.push(searchTerm);
-        localStorage.setItem("searchCat", JSON.stringify(searchHistoryCat));
+        
     } else if (selectedPetType === 'dog') {
         getInfoByDogBreed(searchTerm);
-        searchHistoryDog.push(searchTerm);
-        localStorage.setItem("searchDog", JSON.stringify(searchHistoryDog));
+        
     } 
-    displayLocalStorage(searchTerm);
+    
 }
 
 // function to show pop up modal
@@ -353,6 +359,7 @@ function clearHistory(event) {
     localStorage.removeItem("searchCat");
     searchHistoryCat = [];
     historyElDog.innerHTML = "";
+    historyElCat.innerHTML = "";
     clearCurrent();
     petType.selectedIndex = 0;
     
