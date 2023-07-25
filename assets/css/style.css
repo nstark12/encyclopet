@@ -46,3 +46,8 @@ li {
     padding: 76px;
 }
 
+@media(max-width: 600px) {
+    iframe {
+        width: 375px;
+    }
+}
