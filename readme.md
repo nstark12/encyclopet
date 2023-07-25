@@ -23,7 +23,7 @@ To use this application, user can click on either button, 'Dog Fact' or 'Cat Fac
 These searches will save to local storage as buttons so the user can easily look at past searches. There is also a button to clear history that will remove the past search buttons and any searches saved in local storage.
 
 View screenshot of webpage below:
-![screenshot of encycloPet](./assets/images/encylopet.png)
+![screenshot of encycloPet](./assets/images/encyclopet.png)
 
 Link to webpage: https://nstark12.github.io/encyclopet/ 
 
